@@ -96,8 +96,6 @@ export const listingQuery = graphql` {
                 website
                 category
                 tags
-                cover
-                date
               }
             }
           }
