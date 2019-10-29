@@ -94,6 +94,8 @@ export const listingQuery = graphql` {
               frontmatter {
                 title
                 website
+                twit
+                inst
                 category
                 tags
               }
