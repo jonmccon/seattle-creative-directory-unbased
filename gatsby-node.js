@@ -78,7 +78,6 @@ exports.createPages = async ({ graphql, actions }) => {
   const categorySet = new Set();
 
   const postsEdges = markdownQueryResult.data.allMarkdownRemark.edges;
-  // const directoryPost = markdownQueryResult.data.allDirectoryPosts.edges;
 
   // Sort posts
   postsEdges.sort((postA, postB) => {
@@ -115,7 +114,7 @@ exports.createPages = async ({ graphql, actions }) => {
     });
   });
 
-  // Post page creating
+  // Page creating
   postsEdges.forEach((edge, index) => {
     // Generate a list of tags
     if (edge.node.frontmatter.tags) {
@@ -124,12 +123,18 @@ exports.createPages = async ({ graphql, actions }) => {
       });
     }
 
-    // Generate a list of categories
+    // Generate a list of categories (singlar)
     if (edge.node.frontmatter.category) {
       categorySet.add(edge.node.frontmatter.category);
     }
 
-    // Duplicate for directoryPost page
+    // // Generate a list of categories (plural)
+    // if (edge.node.frontmatter.category) {
+    //   edge.node.frontmatter.categoryforEach(category => {
+    //     categorySet.add(category);
+    //   });
+    // }
+
     // Create post pages
     const nextID = index + 1 < postsEdges.length ? index + 1 : 0;
     const prevID = index - 1 >= 0 ? index - 1 : postsEdges.length - 1;
