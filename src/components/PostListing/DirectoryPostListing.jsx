@@ -1,5 +1,4 @@
 import React from "react";
-import { Link } from "gatsby";
 import PostTags from "../PostTags/PostTags"
 
 class DirectoryPostListing extends React.Component {
@@ -18,15 +17,18 @@ class DirectoryPostListing extends React.Component {
   render() {
     const postList = this.getPostList();
     return (
-      <div id="directoryList">
+      <div class="directoryList">
         {/* Your post list here. */
         postList.map(post => (
           
           <React.Fragment>
             
+            <div class="directoryListItem">
             <a href={post.website} target="_blank"> <h2> {post.title} </h2></a>
+            {/* force alphabatize listing of tags mayhaps? */}
             <PostTags tags={post.tags} />
             {/* include social handle, make a new component */}
+            </div>
 
           </React.Fragment>
         ))}
