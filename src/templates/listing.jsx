@@ -16,31 +16,16 @@ class Listing extends React.Component {
     const nextPage = `/${currentPageNum + 1}/`;
     const isFirstPage = currentPageNum === 1;
     const isLastPage = currentPageNum === pageCount;
-
-    // return (
-    //   <div className="paging-container">
-    //     {!isFirstPage && <Link to={prevPage}>Previous</Link>}
-    //     {[...Array(pageCount)].map((_val, index) => {
-    //       const pageNum = index + 1;
-    //       return (
-    //         <Link
-    //           key={`listing-page-${pageNum}`}
-    //           to={pageNum === 1 ? "/" : `/${pageNum}/`}
-    //         >
-    //           {pageNum}
-    //         </Link>
-    //       );
-    //     })}
-    //     {!isLastPage && <Link to={nextPage}>Next</Link>}
-    //   </div>
-    // );
   }
-// 
 
   render() {
 
     // this can be refactored as a variable based approach, and only one graphql query
-    const postEdges = this.props.data.ListingQuery.edges;
+    // Look at the tags page for an example of this
+    
+    
+    // const postEdges = this.props.data.ListingQueryPodcast.edges;
+
     const postEdgesDirectoryA = this.props.data.directoryListingQueryA.edges;
     const postEdgesDirectoryB = this.props.data.directoryListingQueryB.edges;
     const postEdgesDirectoryC = this.props.data.directoryListingQueryC.edges;
@@ -77,10 +62,13 @@ class Listing extends React.Component {
 
           <div className="title">
           </div>
-
+          
+          
+          {/* 
           <div className="podcast">
             <PostListing postEdges={postEdges} />   
-          </div>
+          </div> 
+          */}
             
             
            
@@ -133,7 +121,7 @@ export default Listing;
 
 /* eslint no-undef: "off" */
 export const listingQuery = graphql` {
-  ListingQuery: 
+  ListingQueryPodcast: 
     allMarkdownRemark(
       sort: { fields: [fields___date], order: DESC }
       filter: {frontmatter: {category: {eq: "interview"}}}
