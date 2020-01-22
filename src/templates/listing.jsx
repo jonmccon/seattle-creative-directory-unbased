@@ -3,6 +3,8 @@ import Helmet from "react-helmet";
 import { graphql, Link } from "gatsby";
 import Layout from "../layout";
 import PostListing from "../components/PostListing/PostListing";
+import PostTags from "../components/Filters/PostTags"
+import PostCats from "../components/Filters/PostCats"
 import DirectoryListing from "../components/PostListing/DirectoryPostListing";
 import SEO from "../components/SEO/SEO";
 import config from "../../data/SiteConfig";
@@ -23,9 +25,11 @@ class Listing extends React.Component {
     // this can be refactored as a variable based approach, and only one graphql query
     // Look at the tags page for an example of this
     
-    
-    // const postEdges = this.props.data.ListingQueryPodcast.edges;
+    const allTags = this.props.data.AllTagsQuery.distinct;
+    const allCats = this.props.data.AllCatsQuery.distinct;
 
+    // const postEdges = this.props.data.ListingQueryPodcast.edges;
+    
     const postEdgesDirectoryA = this.props.data.directoryListingQueryA.edges;
     const postEdgesDirectoryB = this.props.data.directoryListingQueryB.edges;
     const postEdgesDirectoryC = this.props.data.directoryListingQueryC.edges;
@@ -53,23 +57,24 @@ class Listing extends React.Component {
     const postEdgesDirectoryY = this.props.data.directoryListingQueryY.edges;
     const postEdgesDirectoryZ = this.props.data.directoryListingQueryZ.edges;
     
-
+   
     return (
       <Layout>
         <div className="container">
           <Helmet title={config.siteTitle} />
           <SEO />
 
-          <div className="title">
+          <div className="title"></div>
+          <div className="tagBox">
+            <PostCats cats={allCats} />
+            <PostTags tags={allTags} />
           </div>
-          
           
           {/* 
           <div className="podcast">
             <PostListing postEdges={postEdges} />   
           </div> 
           */}
-            
             
            
           <div className="directory">
@@ -121,6 +126,14 @@ export default Listing;
 
 /* eslint no-undef: "off" */
 export const listingQuery = graphql` {
+  AllCatsQuery: 
+    allMarkdownRemark {
+      distinct(field: frontmatter___category)
+    }
+  AllTagsQuery: 
+    allMarkdownRemark {
+      distinct(field: frontmatter___tags)
+    }
   ListingQueryPodcast: 
     allMarkdownRemark(
       sort: { fields: [fields___date], order: DESC }
