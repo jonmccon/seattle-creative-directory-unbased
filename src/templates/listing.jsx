@@ -26,6 +26,7 @@ class Listing extends React.Component {
     // Look at the tags page for an example of this
     
     const allTags = this.props.data.AllTagsQuery.distinct;
+    const allCats = this.props.data.AllCatsQuery.distinct;
 
     // const postEdges = this.props.data.ListingQueryPodcast.edges;
     
@@ -65,6 +66,7 @@ class Listing extends React.Component {
 
           <div className="title"></div>
           <div className="tagBox">
+            <PostCats cats={allCats} />
             <PostTags tags={allTags} />
           </div>
           
