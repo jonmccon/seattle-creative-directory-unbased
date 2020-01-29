@@ -1,6 +1,5 @@
 import React from "react";
-import { Link } from "gatsby";
-import PostTags from "../PostTags/PostTags"
+import PostTags from "../Filters/PostTags"
 
 class DirectoryPostListing extends React.Component {
   getPostList() {
@@ -18,15 +17,22 @@ class DirectoryPostListing extends React.Component {
   render() {
     const postList = this.getPostList();
     return (
-      <div id="directoryList">
-        {/* Your post list here. */
+      <div class="directoryList">
+        {
         postList.map(post => (
           
           <React.Fragment>
             
+            {/* 
+            Have a class added for each tag that's present. 
+            Add an additional a:hover class for each that changes its own display.
+            Needs to be added to the side rail listing as well. 
+            */}
+            <div class="directoryListItem">
             <a href={post.website} target="_blank"> <h2> {post.title} </h2></a>
             <PostTags tags={post.tags} />
             {/* include social handle, make a new component */}
+            </div>
 
           </React.Fragment>
         ))}
