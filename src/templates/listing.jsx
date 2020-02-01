@@ -56,6 +56,7 @@ class Listing extends React.Component {
     const postEdgesDirectoryX = this.props.data.directoryListingQueryX.edges;
     const postEdgesDirectoryY = this.props.data.directoryListingQueryY.edges;
     const postEdgesDirectoryZ = this.props.data.directoryListingQueryZ.edges;
+    const postEdgesDirectoryNumbers = this.props.data.directoryListingQueryNumbers.edges;
     
    
     return (
@@ -118,6 +119,7 @@ class Listing extends React.Component {
             <div className="directoryBlock"><h3>X</h3><DirectoryListing postEdgesDirectory={postEdgesDirectoryX} /></div>
             <div className="directoryBlock"><h3>Y</h3><DirectoryListing postEdgesDirectory={postEdgesDirectoryY} /></div>
             <div className="directoryBlock"><h3>Z</h3><DirectoryListing postEdgesDirectory={postEdgesDirectoryZ} /></div>
+            <div className="directoryBlock"><h3>#</h3><DirectoryListing postEdgesDirectory={postEdgesDirectoryNumbers} /></div>
           </div>
 
           {this.renderPaging()}
@@ -616,6 +618,24 @@ export const listingQuery = graphql` {
     allMarkdownRemark(
       sort: { fields: frontmatter___title, order: ASC }
       filter: {frontmatter: {category: {eq: "Z"}}}
+    ) {
+      edges {
+        node {
+          frontmatter {
+            title
+            website
+            twit
+            inst
+            category
+            tags
+          }
+        }
+      }
+    }            
+  directoryListingQueryNumbers: 
+    allMarkdownRemark(
+      sort: { fields: frontmatter___title, order: ASC }
+      filter: {frontmatter: {category: {eq: "numbers"}}}
     ) {
       edges {
         node {
