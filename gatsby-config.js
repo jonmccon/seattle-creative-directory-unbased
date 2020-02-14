@@ -25,14 +25,21 @@ module.exports = {
       resolve: "gatsby-source-filesystem",
       options: {
         name: "assets",
-        path: `${__dirname}/static/`
+        path: `static/`
       }
     },
     {
       resolve: "gatsby-source-filesystem",
       options: {
         name: "posts",
-        path: `${__dirname}/content/`
+        path: `content/`
+      }
+    },
+    {
+      resolve: "gatsby-source-filesystem",
+      options: {
+        name: "fonts",
+        path: `src/fonts/`
       }
     },
     {
@@ -53,6 +60,12 @@ module.exports = {
           "gatsby-remark-prismjs"
         ]
       }
+    },
+    {
+      resolve: `gatsby-plugin-styled-components`,
+      options: {
+        // Add any options here
+      },
     },
     {
       resolve: "gatsby-plugin-google-analytics",
